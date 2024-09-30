@@ -57,6 +57,9 @@ export const getTags = async (req, res) => {
       tags.push(tag);
     }
 
+    // Sort tags by createdAt ASC
+    tags.sort((a, b) => a.createdAt - b.createdAt);
+
     responseHandler.ok(res, tags);
   } catch (error) {
     console.log(error);
