@@ -5,7 +5,7 @@ import tokenMiddleware from "../middlewares/token.middleware.js";
 const router = express.Router();
 
 router.get("/tags", toolsController.getTags);
-router.get("/approved/:tagId", toolsController.getApprovedToolsByTagId);
+router.get("/approved/:tagName", toolsController.getApprovedToolsByTagName);
 router.put(
   "/update-status/:id",
   tokenMiddleware.auth,

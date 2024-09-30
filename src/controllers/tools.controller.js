@@ -65,12 +65,17 @@ export const getTags = async (req, res) => {
   }
 };
 
-export const getApprovedToolsByTagId = async (req, res) => {
+export const getApprovedToolsByTagName = async (req, res) => {
   try {
-    const { tagId } = req.params;
+    const { tagName } = req.params;
+
+    const tagsDocs = await getDocs(
+      query(TagsTable, where("name", "==", tagName))
+    );
+    const tag = Tag.getData(tagsDocs.docs[0]);
 
     const toolTagDocs = await getDocs(
-      query(ToolTagsTable, where("tagId", "==", tagId))
+      query(ToolTagsTable, where("tagId", "==", tag.id))
     );
     const tools = [];
     for (const toolTagDoc of toolTagDocs.docs) {
