@@ -6,7 +6,11 @@ import "dotenv/config.js";
 const app = express();
 app.use(
   cors({
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "*",
+    headers: "content-type",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    exposeHeaders:
+      "access-control-allow-origin,access-control-allow-methods,access-control-allow-headers",
   })
 );
 app.use(express.json());
