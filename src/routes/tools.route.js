@@ -5,14 +5,15 @@ import tokenMiddleware from "../middlewares/token.middleware.js";
 const router = express.Router();
 
 router.get("/tags", toolsController.getTags);
+
 router.get("/approved/:tagName", toolsController.getApprovedToolsByTagName);
+router.get("/:status", toolsController.getToolsByStatus);
+
 router.put(
   "/update-status/:id",
   tokenMiddleware.auth,
   toolsController.updateToolStatus
 );
-
-router.get("/:status", toolsController.getToolsByStatus);
 
 router.post("/", toolsController.addTool);
 

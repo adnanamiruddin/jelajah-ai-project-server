@@ -4,15 +4,7 @@ import routes from "./src/routes/index.js";
 import "dotenv/config.js";
 
 const app = express();
-app.use(
-  cors({
-    origin: "*",
-    headers: "content-type",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    exposeHeaders:
-      "access-control-allow-origin,access-control-allow-methods,access-control-allow-headers",
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use("/api", routes);
 

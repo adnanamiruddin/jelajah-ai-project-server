@@ -62,8 +62,6 @@ export const getTags = async (req, res) => {
 
     responseHandler.ok(res, tags);
   } catch (error) {
-    console.log(error);
-
     responseHandler.error(res);
   }
 };
@@ -151,8 +149,6 @@ export const addTool = async (req, res) => {
 
     responseHandler.ok(res);
   } catch (error) {
-    console.log(error);
-
     responseHandler.error(res);
   }
 };
