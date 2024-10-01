@@ -82,16 +82,12 @@ export const getApprovedToolsByTagName = async (req, res) => {
     for (const toolTagDoc of toolTagDocs.docs) {
       const toolTag = ToolTag.getData(toolTagDoc);
 
-      const toolsDocs = await getDocs(
-        query(ToolsTable, where("id", "==", toolTag.toolId))
-      );
-      for (const toolDoc of toolsDocs.docs) {
-        const tool = Tool.getData(toolDoc);
+      const toolsDocs = await getDoc(doc(ToolsTable, toolTag.toolId));
+      const tool = Tool.getData(toolsDocs);
 
-        if (tool.status !== "approved") continue;
-
+      if (tool.status === "approved") {
         const toolUserProfileDocs = await getDocs(
-          query(ToolUserProfilesTable, where("toolId", "==", toolDoc.id))
+          query(ToolUserProfilesTable, where("toolId", "==", toolTag.toolId))
         );
         const toolUserProfile = ToolUserProfile.getData(
           toolUserProfileDocs.docs[0]
